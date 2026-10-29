@@ -125,12 +125,12 @@ function renderAchievements() {
     const peopleTag = item.people ? '<span class="tag tag-people">Depende de otras personas</span>' : '';
     return '<article class="achievement-card">' +
       '<div class="card-top"><div class="badge-identity"><span class="badge-symbol" aria-hidden="true">' + item.symbol + '</span>' +
-      '<div><h3>' + item.name + '</h3><span class="card-kind">' + item.kind + '</span></div></div>' + costTag + '</div>' +
+      '<div><h3>' + item.name + '</h3><span class="card-kind">' + item.kind + '</span></div></div>' +
+      '<div class="badge-tags">' + costTag + peopleTag + '</div></div>' +
       '<p class="achievement-description">' + item.description + '</p>' +
       '<div class="threshold"><strong>Referencia:</strong> ' + item.threshold + '</div>' +
       '<div class="card-bottom"><a class="source-link" href="' + item.source + '" target="_blank" rel="noreferrer">Ver fuente ↗</a>' +
       '<label class="earned-label' + (checked ? ' is-earned' : '') + '"><input type="checkbox" data-achievement="' + item.id + '"' + (checked ? ' checked' : '') + '> Ya la tengo</label></div>' +
-      (peopleTag ? '<span class="sr-only">' + peopleTag + '</span>' : '') +
       '</article>';
   }).join('');
 }
@@ -198,6 +198,7 @@ function renderProfile(profile, repositories, mergedCount) {
   const profileUrl = escapeHtml(profile.html_url);
   const name = escapeHtml(profile.name || profile.login);
   const bio = profile.bio ? ' · ' + escapeHtml(profile.bio) : '';
+  const mergedLabel = mergedCount == null ? 'no disponible' : formatNumber(mergedCount);
 
   resultPanel.innerHTML =
     '<div class="profile-top"><img class="avatar" src="' + avatar + '" alt="" width="48" height="48">' +
@@ -208,7 +209,7 @@ function renderProfile(profile, repositories, mergedCount) {
     '<div class="stat"><div class="stat-value">' + formatNumber(profile.followers) + '</div><div class="stat-label">personas seguidoras (dato público)</div></div>' +
     '<div class="stat"><div class="stat-value">' + formatNumber(stars) + ' / 16</div><div class="stat-label">estrellas en el repo propio más destacado · ' + repoLink + '</div>' +
     '<div class="star-progress" aria-label="' + starsPercent + '% del umbral comunitario de 16 estrellas"><span style="width:' + starsPercent + '%"></span></div></div></div>' +
-    '<p class="profile-meta" style="margin-top:12px">La búsqueda pública encontró ' + formatNumber(mergedCount) + ' PR fusionados. Ese número no confirma por sí solo un logro: GitHub no expone Achievements en la API pública.</p>';
+    '<p class="profile-meta" style="margin-top:12px">La búsqueda pública encontró ' + mergedLabel + ' PR fusionados. Ese número no confirma por sí solo un logro: GitHub no expone Achievements en la API pública.</p>';
   resultPanel.hidden = false;
 }
 
@@ -229,7 +230,7 @@ async function loadProfile(event) {
     const results = await Promise.all([
       fetchJson('https://api.github.com/users/' + encodeURIComponent(username)),
       fetchRepositories(username),
-      fetchJson('https://api.github.com/search/issues?' + searchQuery.toString()).catch(function () { return { total_count: 0 }; })
+      fetchJson('https://api.github.com/search/issues?' + searchQuery.toString()).catch(function () { return { total_count: null }; })
     ]);
     renderProfile(results[0], results[1], results[2].total_count);
     setStatus('Consulta terminada. Los datos son públicos y pueden tardar en actualizarse.', false);
@@ -262,5 +263,4 @@ achievementList.addEventListener('change', function (event) {
 });
 
 renderAchievements();
-form.addEventListener('submit', loadProfile);
 loadProfile();
