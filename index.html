@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Guía gratuita y transparente para conocer logros de GitHub y revisar datos públicos de una cuenta.">
+  <meta name="theme-color" content="#102c2b">
+  <title>Insignias de GitHub</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Insignias de GitHub, inicio">
+      <span class="brand-mark" aria-hidden="true">GH</span>
+      <span>Insignias de GitHub</span>
+    </a>
+    <a class="header-link" href="https://docs.github.com/en/account-and-profile/reference/profile-reference" target="_blank" rel="noreferrer">Referencia de GitHub ↗</a>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="eyebrow">GUÍA ABIERTA · SIN TOKENS · SIN PAGOS</p>
+        <h1 id="page-title">Entiende tus logros.<br><span>Hazlos a tu manera.</span></h1>
+        <p class="hero-description">Una guía en español para distinguir qué insignias siguen disponibles, cuáles dependen de otras personas y cuáles tienen un coste.</p>
+      </div>
+      <div class="hero-orbit" aria-hidden="true">
+        <span class="orbit orbit-one"></span><span class="orbit orbit-two"></span><span class="orbit orbit-three"></span>
+        <span class="orbit-core">✦</span>
+      </div>
+    </section>
+
+    <section class="profile-check panel" aria-labelledby="profile-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">DATOS PÚBLICOS</p>
+          <h2 id="profile-title">Revisa una cuenta</h2>
+        </div>
+        <p class="section-note">Solo consultamos la API pública de GitHub. No iniciamos sesión ni pedimos permisos.</p>
+      </div>
+      <form id="profile-form" class="profile-form">
+        <label for="username">Usuario de GitHub</label>
+        <div class="input-row">
+          <span class="input-prefix" aria-hidden="true">@</span>
+          <input id="username" name="username" type="text" value="xAlan007x" autocomplete="off" spellcheck="false" maxlength="39" required>
+          <button type="submit" id="load-profile">Consultar perfil <span aria-hidden="true">→</span></button>
+        </div>
+      </form>
+      <p id="status" class="status" role="status" aria-live="polite">Escribe un usuario y consulta sus datos públicos.</p>
+      <div id="profile-results" class="profile-results" hidden></div>
+    </section>
+
+    <section class="achievements" aria-labelledby="achievements-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">LOGROS DE ACTIVIDAD</p>
+          <h2 id="achievements-title">Insignias que puedes conseguir gratis</h2>
+        </div>
+        <p class="section-note">Marca las que ya tienes. El progreso se guarda en este navegador.</p>
+      </div>
+      <div class="filters" role="group" aria-label="Filtrar insignias">
+        <button class="filter-button is-selected" type="button" data-filter="free" aria-pressed="true">Gratis</button>
+        <button class="filter-button" type="button" data-filter="all" aria-pressed="false">Todas las activas</button>
+        <button class="filter-button" type="button" data-filter="needs-people" aria-pressed="false">Necesitan a otras personas</button>
+      </div>
+      <div id="achievement-list" class="achievement-grid"></div>
+    </section>
+
+    <section class="highlights panel" aria-labelledby="highlights-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">INSIGNIAS DE PROGRAMAS</p>
+          <h2 id="highlights-title">Otras insignias sin cuota</h2>
+        </div>
+        <p class="section-note">No son logros de actividad y tienen requisitos propios.</p>
+      </div>
+      <div class="highlight-grid">
+        <article class="highlight-card">
+          <span class="highlight-icon" aria-hidden="true">⌘</span>
+          <div><h3>Developer Program Member</h3><p>Gratis si desarrollas una integración con la API de GitHub y cumples los requisitos del programa. La inscripción incluye un acuerdo de desarrollador.</p></div>
+          <span class="tag tag-conditional">Requiere inscripción</span>
+        </article>
+        <article class="highlight-card">
+          <span class="highlight-icon" aria-hidden="true">⌂</span>
+          <div><h3>GitHub Campus Expert</h3><p>Sin cuota, para personas que cumplen los requisitos del programa Campus Experts.</p></div>
+          <span class="tag tag-conditional">Elegibilidad especial</span>
+        </article>
+        <article class="highlight-card">
+          <span class="highlight-icon" aria-hidden="true">◇</span>
+          <div><h3>Security advisory credit</h3><p>Se concede cuando GitHub acepta una contribución de seguridad válida a su base de datos de avisos.</p></div>
+          <span class="tag tag-people">Revisión de GitHub</span>
+        </article>
+        <article class="highlight-card">
+          <span class="highlight-icon" aria-hidden="true">⌕</span>
+          <div><h3>Security Bug Bounty Hunter</h3><p>Reconoce reportes de vulnerabilidades aceptados dentro del programa de seguridad de GitHub.</p></div>
+          <span class="tag tag-people">Revisión de GitHub</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="notes-grid" aria-label="Notas sobre la guía">
+      <article class="note-card">
+        <span class="note-number">01</span>
+        <h2>Lo que la API puede comprobar</h2>
+        <p>Repositorios públicos, estrellas y algunos datos visibles. La API pública no informa qué logros tiene una persona.</p>
+      </article>
+      <article class="note-card">
+        <span class="note-number">02</span>
+        <h2>Lo que depende de la comunidad</h2>
+        <p>Un PR aceptado, una respuesta elegida o una coautoría real requieren trabajo útil y la participación de otras personas.</p>
+      </article>
+      <article class="note-card">
+        <span class="note-number">03</span>
+        <h2>Umbrales con contexto</h2>
+        <p>GitHub mantiene Achievements en vista previa y no publica una tabla completa de criterios. Los números se etiquetan como referencias comunitarias.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>Hecho para aprender y contribuir de verdad.</span>
+    <span>Sin iniciar sesión · Sin recopilar datos · Sin cuota</span>
+  </footer>
+</body>
+</html>
